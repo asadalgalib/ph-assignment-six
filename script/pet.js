@@ -47,8 +47,6 @@ const loadCategoryVedios = (id) => {
     }, 2000);
 }
 
-// loadCategoryVedios("Dog");
-
 // display category button
 const displayCategories = (categories) => {
     const buttonContainer = document.getElementById('button-container');
@@ -86,7 +84,6 @@ function loadVedios() {
 loadVedios()
 
 // display vedio
-
 const displayVedios = (vedios) => {
     const cardContainer = document.getElementById("petcards");
     cardContainer.innerHTML = " ";
@@ -94,7 +91,7 @@ const displayVedios = (vedios) => {
     if (vedios.length == 0) {
         cardContainer.classList.remove("grid")
         cardContainer.innerHTML = `
-        <div class="bg-[#13131308] rounded-xl flex flex-col items-center justify-center p-24">
+        <div class="bg-[#13131308] rounded-xl flex flex-col items-center justify-center p-5 md:p-16 lg:p-24">
         <img class="" src="./images/error.webp" alt="">
         <h2 class="text-3xl font-extrabold text-center">No Information Available</h2>
         <p class="max-w-2xl text-center  mt-4">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
@@ -104,7 +101,6 @@ const displayVedios = (vedios) => {
     } else {
         cardContainer.classList.add("grid")
     }
-
     vedios.forEach((vedio => {
         // console.log(vedio.petId)
         const card = document.createElement('div')
@@ -136,7 +132,6 @@ const displayVedios = (vedios) => {
         cardContainer.append(card);
     }))
 }
-
 
 // load pet image by id
 const loadImage = (id) => {
@@ -173,7 +168,6 @@ const loadDetails = (id) => {
 
 // show details 
 const showDetails = (data) => {
-    console.log(data.petData)
     const detailsContainer = document.getElementById("my_modal_5")
     detailsContainer.innerHTML = " ";
     const detailsCard = document.createElement('div');
@@ -245,8 +239,6 @@ const editModalCongrates = () => {
         }, 1000)
     }
     closeModal()
-
-    // disBtn.setAttribute("disabled","")
 }
 
 // disable button
@@ -283,7 +275,6 @@ const sortBtn = () => {
 
 // sort data 
 const sortLodedData = (data) => {
-    console.log('sorted', data)
     const sortedData = data.sort((a, b) => b.price - a.price)
     displayVedios(sortedData);
 };
