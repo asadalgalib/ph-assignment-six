@@ -105,7 +105,7 @@ const displayVedios = (vedios) => {
            <hr>
            <div class="flex flex-wrap items-center justify-around gap-2 text-base">
            <button onclick= "loadImage('${vedio.petId}')" class="btn bg-white text-[#0E7A81] hover:bg-[#0E7A81]"><img class="w-5 h-5" src="./images/icons8-like-64.png" alt=""></button>
-           <button onclick= "" class="btn bg-white text-[#0E7A81] hover:bg-[#0E7A81] hover:text-white">Addopt</button>
+           <button onclick= "my_modal_6.showModal(), editModalCongrates()" class="btn bg-white text-[#0E7A81] hover:bg-[#0E7A81] hover:text-white">Addopt</button>
            <button onclick="my_modal_5.showModal(), loadDetails('${vedio.petId}')" class="btn bg-white text-[#0E7A81] hover:bg-[#0E7A81] hover:text-white">Details</button>
            </div>
         </div>
@@ -144,6 +144,7 @@ const loadDetails = (id) =>{
     .then( res => res.json())
     .then( data => {
         showDetails(data);
+       
     })
     .catch(error => console.log(error));
 }
@@ -152,8 +153,6 @@ const loadDetails = (id) =>{
 const showDetails = (data) =>{
     const detailsContainer = document.getElementById("my_modal_5")
     detailsContainer.innerHTML = " ";
-
-    console.log(data.petData)
     const detailsCard = document.createElement('div');
     detailsCard.classList.add("flex","flex-col", "justify-center", "items-center")
     detailsCard.innerHTML = `
@@ -189,4 +188,38 @@ const showDetails = (data) =>{
 
     `
     detailsContainer.append(detailsCard);
+}
+
+// show congrates 
+const editModalCongrates = () =>{
+    const congratesContainer = document.getElementById("my_modal_6")
+    // console.log(congratesContainer)
+    congratesContainer.innerHTML =`
+    <div class="modal-box flex flex-col items-center justify-center">
+    <img class="w-20 h-auto" src="./images/icons8-handshake-50.png"/>
+    <h3 class="text-3xl font-extrabold text-center">Congrates!</h3>
+    <p class="py-4 text-center">Adoption Process is Start For your Pet!</p>
+    <h4 id="count-text" class="text-6xl font-bold text-center">3</h4>
+    <div class="modal-action">
+      
+    </div>
+  </div>
+    `
+    
+    const closeModal = () => {
+        const count = document.getElementById('count-text');
+        let countValue = 3;
+        // console.log(countValue) 
+        const counDownInterval = setInterval(() => {
+            countValue--;
+            count.innerText = countValue;
+            
+            if( countValue == 0){
+                clearInterval(counDownInterval);
+                my_modal_6.close();
+            }
+        },1000)
+    }
+    closeModal()
+    
 }
